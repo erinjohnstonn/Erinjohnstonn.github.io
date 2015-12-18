@@ -1,10 +1,19 @@
 var img;
 var season;
 var y=0;
-//
-// function preload() {
-// 	img = loadImage("assets/tree.png");
-// }
+var springSound;
+var summerSound;
+var fallSound;
+var winterSound;
+
+function preload() {
+
+	winterSound = loadSound('assets/winter.mp3');
+	summerSound = loadSound('assets/summer.mp3');
+	springSound = loadSound('assets/Bird.mp3');
+	// summerSound = loadSound('Bird.mp3');
+
+}
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -19,6 +28,7 @@ function draw() {
 	background(0);
 	image(img, 0, 0);
 	if (season == 12||season<3){
+		winterSound.play();
 		image(img, 0, 0);
 		for(var a = 0; a<1000 ; a++) {
 			if(a % 2 == 1) { // COPY IF + ELSE IF TO AFFECT EVERY OTHER CIRCLE IN THE LINE
@@ -76,9 +86,11 @@ ellipse(20*a, y+560, 5, 5); //
 		} else if (season < 6 && season >= 3 ) {
 		 fill ('#fae');
 		 leaves();
+		 springSound.play();
 	 } else if ( season < 8 && season >= 6  ) {
 		 fill ('rgb(0,255,0)');
 		 leaves();
+		 summerSound.play();
 		}
 		y=second() * 10;
 }
@@ -186,30 +198,4 @@ function leaves() {
 		ellipse(250, 475, 60, 60);
 		ellipse(740, 350, 60, 60);
 		ellipse(775, 320, 60, 60);
-}
-
-
-function preload() {
-  mySound = loadSound;
-
-if (season == 12||season<3){
-loadSound('winter.mp3');
-
-	} else if(season < 12 && season >= 9) {
-		loadSound();
-
-	} else if (season < 6 && season >= 3 ) {
-	 mySound = loadSound('Bird.mp3');
-
- } else if ( season < 8 && season >= 6  ) {
-	mySound = loadSound('summer.mp3');
-
-  textAlign(CENTER);
-  text('click here to play', width/2, height/2);
-
-  mySound.setVolume(0.1);
-}
-function setup() {
-  createCanvas(100, 100);
-  background(0, 255, 0);
 }
